@@ -1,0 +1,114 @@
+#!/bin/bash
+#
+# check_os_eol - A script to check the End Of Life (EOL) status of various Linux distributions.
+#
+# Copyright (C) 2024 pr0j3ctx
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+#
+  
+# EOL dates of major Linux distributions (as of July 2024)
+declare -A EOL_DATES
+EOL_DATES=(
+    ["ubuntu-18.04"]="2023-04-30"
+    ["ubuntu-20.04"]="2025-04-30"
+    ["ubuntu-22.04"]="2027-04-30"
+    ["ubuntu-24.04"]="2029-04-30"
+    ["debian-10"]="2024-06-30"
+    ["debian-11"]="2026-06-30"
+    ["debian-12"]="2028-06-30"
+    ["centos-7"]="2024-06-30"
+    ["centos-8"]="2021-12-31"
+    ["rhel-7"]="2024-06-30"
+    ["rhel-8"]="2029-05-31"
+    ["rhel-9"]="2032-05-31"
+    ["fedora-37"]="2024-12-31"
+    ["fedora-38"]="2025-06-30"
+    ["rocky-8"]="2029-05-31"
+    ["rocky-9"]="2032-05-31"
+    ["alma-8"]="2029-05-31"
+    ["alma-9"]="2032-05-31"
+    ["sles-12"]="2027-10-31"
+    ["sles-15"]="2031-07-31"
+    ["opensuse-15.5"]="2024-12-31"
+)
+
+# Default values for WARN and CRIT in days
+DEFAULT_WARN_DAYS=90
+DEFAULT_CRIT_DAYS=30
+
+# Function to display help
+display_help() {
+    echo "Usage: $0 [WARN_DAYS] [CRIT_DAYS]"
+    echo
+    echo "Check the EOL status of the current OS."
+    echo
+    echo "Optional arguments:"
+    echo "  WARN_DAYS   Number of days before EOL to issue a warning (default: $DEFAULT_WARN_DAYS)"
+    echo "  CRIT_DAYS   Number of days before EOL to issue a critical alert (default: $DEFAULT_CRIT_DAYS)"
+    echo "  -h          Display this help message"
+    echo
+    exit 0
+}
+
+# Check for help option
+if [[ "$1" == "-h" ]]; then
+    display_help
+fi
+
+# Passed parameters
+WARN_DAYS=${1:-$DEFAULT_WARN_DAYS}
+CRIT_DAYS=${2:-$DEFAULT_CRIT_DAYS}
+
+# Convert days to seconds since epoch
+WARN_SECONDS=$((WARN_DAYS * 86400))
+CRIT_SECONDS=$((CRIT_DAYS * 86400))
+CURRENT_DATE=$(date +%s)
+
+# Read OS version
+if [[ -f /etc/os-release ]]; then
+    source /etc/os-release
+    OS="${ID}-${VERSION_ID}"
+else
+    echo "UNKNOWN: /etc/os-release not found"
+    exit 3
+fi
+
+# Get EOL date for the current OS
+EOL_DATE=${EOL_DATES[$OS]}
+
+if [[ -z "$EOL_DATE" ]]; then
+    echo "UNKNOWN: EOL date for $OS not found"
+    exit 3
+fi
+
+# Convert EOL date to seconds since epoch
+EOL_DATE_SECONDS=$(date -d "$EOL_DATE" +%s)
+
+# Calculate time until EOL
+TIME_TO_EOL=$((EOL_DATE_SECONDS - CURRENT_DATE))
+
+if [[ $TIME_TO_EOL -le 0 ]]; then
+    echo "CRITICAL: $OS is already EOL (EOL date: $EOL_DATE)"
+    exit 2
+elif [[ $TIME_TO_EOL -le $CRIT_SECONDS ]]; then
+    echo "CRITICAL: $OS will reach EOL in less than $CRIT_DAYS days (EOL date: $EOL_DATE)"
+    exit 2
+elif [[ $TIME_TO_EOL -le $WARN_SECONDS ]]; then
+    echo "WARNING: $OS will reach EOL in less than $WARN_DAYS days (EOL date: $EOL_DATE)"
+    exit 1
+else
+    echo "OK: $OS will not reach EOL soon (EOL date: $EOL_DATE)"
+    exit 0
+fi
