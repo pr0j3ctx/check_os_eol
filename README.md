@@ -9,7 +9,7 @@
 
 ## Features
 
-- Supports multiple major Linux distributions including Ubuntu, Debian, CentOS, RHEL, Fedora, Rocky Linux, AlmaLinux, SUSE, and openSUSE.
+- Supports multiple major Linux distributions including Ubuntu, Debian, Raspbian, CentOS, RHEL, Fedora, Rocky Linux, AlmaLinux, SUSE, and openSUSE.
 - Configurable warning and critical thresholds.
 - Provides human-readable output indicating the EOL status.
 
