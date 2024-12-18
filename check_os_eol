@@ -2,6 +2,8 @@
 #
 # check_os_eol - A script to check the End Of Life (EOL) status of various Linux distributions.
 #
+# Version: 1.0.2 (2024-12-20)
+#
 # Copyright (C) 2024 pr0j3ctx
 #
 # This program is free software: you can redistribute it and/or modify
@@ -18,33 +20,44 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 #
   
-# EOL dates of major Linux distributions (as of July 2024)
+# EOL dates of major Linux distributions
 declare -A EOL_DATES
 EOL_DATES=(
-    ["ubuntu-18.04"]="2023-04-30"
-    ["ubuntu-20.04"]="2025-04-30"
-    ["ubuntu-22.04"]="2027-04-30"
-    ["ubuntu-24.04"]="2029-04-30"
+    ["alma-8"]="2029-05-31"
+    ["alma-9"]="2032-05-31"
+    ["centos-7"]="2024-06-30"
+    ["centos-8"]="2021-12-31"
+    ["centos-stream-8"]="2024-05-31"
+    ["centos-stream-9"]="2027-05-31"
+    ["centos-stream-10"]="2030-01-01"
     ["debian-10"]="2024-06-30"
     ["debian-11"]="2026-06-30"
     ["debian-12"]="2028-06-30"
-    ["centos-7"]="2024-06-30"
-    ["centos-8"]="2021-12-31"
+    ["fedora-37"]="2024-12-31"
+    ["fedora-38"]="2025-06-30"
+    ["fedora-39"]="2024-11-26"
+    ["fedora-40"]="2025-05-28"
+    ["fedora-41"]="2025-11-25"
+    ["opensuse-15.5"]="2024-12-31"
+    ["oraclelinux-8"]="2029-05-31"
+    ["oraclelinux-9"]="2032-06-30"
     ["raspbian-10"]="2024-06-30"
     ["raspbian-11"]="2026-06-30"
     ["raspbian-12"]="2028-06-30"
     ["rhel-7"]="2024-06-30"
     ["rhel-8"]="2029-05-31"
     ["rhel-9"]="2032-05-31"
-    ["fedora-37"]="2024-12-31"
-    ["fedora-38"]="2025-06-30"
     ["rocky-8"]="2029-05-31"
     ["rocky-9"]="2032-05-31"
-    ["alma-8"]="2029-05-31"
-    ["alma-9"]="2032-05-31"
     ["sles-12"]="2027-10-31"
     ["sles-15"]="2031-07-31"
-    ["opensuse-15.5"]="2024-12-31"
+    ["ubuntu-18.04"]="2023-04-30"
+    ["ubuntu-20.04"]="2025-04-30"
+    ["ubuntu-22.04"]="2027-04-30"
+    ["ubuntu-23.04"]="2024-01-20"
+    ["ubuntu-23.10"]="2024-07-31"
+    ["ubuntu-24.04"]="2029-04-30"
+    ["ubuntu-24.10"]="2025-07-11"
 )
 
 # Default values for WARN and CRIT in days

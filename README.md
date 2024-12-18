@@ -9,7 +9,7 @@
 
 ## Features
 
-- Supports multiple major Linux distributions including Ubuntu, Debian, Raspbian, CentOS, RHEL, Fedora, Rocky Linux, AlmaLinux, SUSE, and openSUSE.
+- Supports multiple major Linux distributions including AlmaLinux, CentOS, CentOS Stream, Debian, Fedora, Oracle Linux, openSUSE, Raspbian, RHEL, Rocky Linux, SUSE, and Ubuntu.
 - Configurable warning and critical thresholds.
 - Provides human-readable output indicating the EOL status.
 
@@ -56,35 +56,53 @@ The script provides output in the following formats:
 
 ## Supported Distributions
 
-- **Ubuntu**
-  - 18.04 (EOL: 2023-04-30)
-  - 20.04 (EOL: 2025-04-30)
-  - 22.04 (EOL: 2027-04-30)
-  - 24.04 (EOL: 2029-04-30)
+- **AlmaLinux**
+  - 8 (EOL: 2029-05-31)
+  - 9 (EOL: 2032-05-31)
+- **CentOS**
+  - 7 (EOL: 2024-06-30)
+  - 8 (EOL: 2021-12-31)
+- **CentOS Stream**
+  - 8 (EOL: 2024-05-31)
+  - 9 (EOL: 2027-05-31)
+  - 10 (EOL: 2030-01-01)
 - **Debian**
   - 10 (EOL: 2024-06-30)
   - 11 (EOL: 2026-06-30)
   - 12 (EOL: 2028-06-30)
-- **CentOS**
-  - 7 (EOL: 2024-06-30)
-  - 8 (EOL: 2021-12-31)
+- **Fedora**
+  - 37 (EOL: 2024-12-31)
+  - 38 (EOL: 2025-06-30)
+  - 39 (EOL: 2024-11-26)
+  - 40 (EOL: 2025-05-28)
+  - 41 (EOL: 2025-11-25)
+- **openSUSE Leap**
+  - 15.5 (EOL: 2024-12-31)
+- **Oracle Linux**
+  - 8 (EOL: 2029-05-31)
+  - 9 (EOL: 2032-06-30)
+- **Raspbian**
+  - 10 (EOL: 2024-06-30)
+  - 11 (EOL: 2026-06-30)
+  - 12 (EOL: 2028-06-30)
 - **RHEL**
   - 7 (EOL: 2024-06-30)
   - 8 (EOL: 2029-05-31)
   - 9 (EOL: 2032-05-31)
-- **Fedora**
-  - 37 (EOL: 2024-12-31)
-  - 38 (EOL: 2025-06-30)
 - **Rocky Linux**
   - 8 (EOL: 2029-05-31)
   - 9 (EOL: 2032-05-31)
-- **AlmaLinux**
-  - 8 (EOL: 2029-05-31)
-  - 9 (EOL: 2032-05-31)
-- **SUSE**
+- **SLES**
   - SLES 12 (EOL: 2027-10-31)
   - SLES 15 (EOL: 2031-07-31)
-  - openSUSE Leap 15.5 (EOL: 2024-12-31)
+- **Ubuntu**
+  - 18.04 (EOL: 2023-04-30)
+  - 20.04 (EOL: 2025-04-30)
+  - 22.04 (EOL: 2027-04-30)
+  - 23.04 (EOL: 2024-01-20)
+  - 23.10 (EOL: 2024-07-31)
+  - 24.04 (EOL: 2029-04-30)
+  - 24.10 (EOL: 2025-07-11)
 
 ## Installation
 
@@ -110,12 +128,15 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
-
-### [Unreleased]
-- Initial release of `check_os_eol`.
-
+### [1.0.2] - 2024-12-20
+- Added EOL data for Ubuntu 23.04/23.10/24.10, CentOS Stream 8-10, Fedora 39-41, and Oracle Linux 8/9.
+### [1.0.1] - 2024-10-20
+- Added support for Raspian, thx to [Nohn](https://github.com/nohn)
 ### [1.0.0] - 2024-07-08
 - Added support for Ubuntu, Debian, CentOS, RHEL, Fedora, Rocky Linux, AlmaLinux, SUSE, and openSUSE.
 - Configurable warning and critical thresholds.
 - Added human-readable output indicating the EOL status.
+
+### [Unreleased]
+- Initial release of `check_os_eol`.
 ```
