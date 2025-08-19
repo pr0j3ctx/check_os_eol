@@ -70,14 +70,17 @@ The script provides output in the following formats:
   - 10 (EOL: 2024-06-30)
   - 11 (EOL: 2026-06-30)
   - 12 (EOL: 2028-06-30)
+  - 13 (EOL: 2030-06-30)
 - **Fedora**
   - 37 (EOL: 2024-12-31)
   - 38 (EOL: 2025-06-30)
   - 39 (EOL: 2024-11-26)
   - 40 (EOL: 2025-05-28)
   - 41 (EOL: 2025-11-25)
+  - 42 (EOL: 2026-05-26)
 - **openSUSE Leap**
   - 15.5 (EOL: 2024-12-31)
+  - 15.6 (EOL: 2025-12-31)
 - **Oracle Linux**
   - 8 (EOL: 2029-05-31)
   - 9 (EOL: 2032-06-30)
@@ -85,6 +88,7 @@ The script provides output in the following formats:
   - 10 (EOL: 2024-06-30)
   - 11 (EOL: 2026-06-30)
   - 12 (EOL: 2028-06-30)
+  - 13 (EOL: 2030-06-30)
 - **RHEL**
   - 7 (EOL: 2024-06-30)
   - 8 (EOL: 2029-05-31)
@@ -103,6 +107,7 @@ The script provides output in the following formats:
   - 23.10 (EOL: 2024-07-31)
   - 24.04 (EOL: 2029-04-30)
   - 24.10 (EOL: 2025-07-11)
+  - 25.04 (EOL: 2030-01-31)
 
 ## Installation
 
@@ -128,6 +133,8 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+### [1.0.3] - 2025-08-19
+- Added EOL data for Debian 13, Fedora 42, OpenSuse 15.6, Raspbian 13 and Ubuntu 25.04
 ### [1.0.2] - 2024-12-20
 - Added EOL data for Ubuntu 23.04/23.10/24.10, CentOS Stream 8-10, Fedora 39-41, and Oracle Linux 8/9.
 ### [1.0.1] - 2024-10-20
