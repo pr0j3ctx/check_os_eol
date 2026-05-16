@@ -141,6 +141,10 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### [1.0.4] - 2026-05-16
+- Added EOL data for Debian 4-9 and Ubuntu 25.10/26.04
+- Fixed EOL data for Ubuntu 18.04/20.04/22.04/24.04/25.04
 ### [1.0.3] - 2025-08-19
 - Added EOL data for Debian 13, Fedora 42, OpenSuse 15.6, Raspbian 13 and Ubuntu 25.04
 ### [1.0.2] - 2024-12-20
