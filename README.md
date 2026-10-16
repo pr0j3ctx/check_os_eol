@@ -107,7 +107,7 @@ The script provides output in the following formats:
   - SLES 15 (EOL: 2031-07-31)
 - **Ubuntu**
   - 16.04 (EOL: 2021-04-30)
-  - 16.05-esm) (EOL: 2028-04-30)
+  - 16.04-esm (EOL: 2028-04-30)
   - 18.04 (EOL: 2023-05-31)
   - 18.04-esm (EOL: 2030-04-30)
   - 20.04 (EOL: 2025-05-31)

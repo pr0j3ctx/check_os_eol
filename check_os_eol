@@ -129,7 +129,7 @@ if [[ "$ID" == "ubuntu" ]]; then
 
     # Check via modern Ubuntu Pro CLI tool
     if command -v pro &>/dev/null; then
-        if pro status --format json 2>/dev/null | grep -Pz '(?s)"name"\s*:\s*"esm-(infra|apps)".*?"status"\s*:\s*"enabled"|"esm-(infra|apps)"\s*:\s*\{.*?"status"\s*:\s*"enabled"' &>/dev/null; then
+        if pro status --format json 2>/dev/null | grep -Pz '(?s)"name"\s*:\s*"esm-(infra|apps)"[^}]*?"status"\s*:\s*"enabled"|"esm-(infra|apps)"\s*:\s*\{[^}]*?"status"\s*:\s*"enabled"' &>/dev/null; then
             IS_ESM_ACTIVE=true
         fi
     # Check via legacy Ubuntu Advantage tool
@@ -137,13 +137,9 @@ if [[ "$ID" == "ubuntu" ]]; then
         if ubuntu-advantage status 2>/dev/null | grep -E 'esm-infra|esm-apps' | grep -q 'enabled'; then
             IS_ESM_ACTIVE=true
         fi
-    fi
-
-    # Fallback check for active ESM repository sources in APT configuration
-    if [[ "$IS_ESM_ACTIVE" == false ]]; then
-        if grep -rq "^deb.*esm.ubuntu.com" /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null; then
-            IS_ESM_ACTIVE=true
-        fi
+    # Fallback check for active ESM repository sources in APT configuration (covers classic and deb822 source formats)
+    elif grep -rEq '^\s*[^#].*esm\.ubuntu\.com' /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null; then
+        IS_ESM_ACTIVE=true
     fi
 
     # Append -esm suffix if system is covered
