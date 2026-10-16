@@ -106,16 +106,23 @@ The script provides output in the following formats:
   - SLES 12 (EOL: 2027-10-31)
   - SLES 15 (EOL: 2031-07-31)
 - **Ubuntu**
+  - 16.04 (EOL: 2021-04-30)
+  - 16.04-esm (EOL: 2028-04-30)
   - 18.04 (EOL: 2023-05-31)
+  - 18.04-esm (EOL: 2030-04-30)
   - 20.04 (EOL: 2025-05-31)
+  - 20.04-esm (EOL: 2032-04-30)
   - 22.04 (EOL: 2027-05-31)
+  - 22.04-esm (EOL: 2034-04-30)
   - 23.04 (EOL: 2024-01-20)
   - 23.10 (EOL: 2024-07-31)
   - 24.04 (EOL: 2029-05-31)
+  - 24.04-esm (EOL: 2036-04-30)
   - 24.10 (EOL: 2025-07-11)
   - 25.04 (EOL: 2026-01-31)
   - 25.10 (EOL: 2026-07-31)
   - 26.04 (EOL: 2031-05-31)
+  - 26.04-esm (EOL: 2038-04-30)
 
 ## Installation
 
@@ -142,6 +149,9 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Changelog
 
+### [1.x.y] - 2026-10-xx
+- Add support for detecting Ubuntu ESM (Expanded Security Maintenance)
+- Added EOL data for Ubuntu ESM versions 16.04 to 26.04
 ### [1.0.4] - 2026-05-16
 - Added EOL data for Debian 4-9 and Ubuntu 25.10/26.04
 - Fixed EOL data for Ubuntu 18.04/20.04/22.04/24.04/25.04

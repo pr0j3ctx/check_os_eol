@@ -4,7 +4,7 @@
 #
 # Version: 1.0.3 (2025-08-19)
 #
-# Copyright (C) 2025 pr0j3ctx
+# Copyright (C) 2026 pr0j3ctx
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -61,6 +61,8 @@ EOL_DATES=(
     ["rocky-9"]="2032-05-31"
     ["sles-12"]="2027-10-31"
     ["sles-15"]="2031-07-31"
+    # Ubuntu Standard (Maintenance) EOL
+    ["ubuntu-16.04"]="2021-04-30"
     ["ubuntu-18.04"]="2023-05-31"
     ["ubuntu-20.04"]="2025-05-31"
     ["ubuntu-22.04"]="2027-05-31"
@@ -71,6 +73,13 @@ EOL_DATES=(
     ["ubuntu-25.04"]="2026-01-31"
     ["ubuntu-25.10"]="2026-07-31"
     ["ubuntu-26.04"]="2031-05-31"
+    # Ubuntu Expanded Security Maintenance (ESM / Ubuntu Pro) EOL
+    ["ubuntu-16.04-esm"]="2028-04-30"
+    ["ubuntu-18.04-esm"]="2030-04-30"
+    ["ubuntu-20.04-esm"]="2032-04-30"
+    ["ubuntu-22.04-esm"]="2034-04-30"
+    ["ubuntu-24.04-esm"]="2036-04-30"
+    ["ubuntu-26.04-esm"]="2038-04-30"
 )
 
 # Default values for WARN and CRIT in days
@@ -112,6 +121,31 @@ if [[ -f /etc/os-release ]]; then
 else
     echo "UNKNOWN: /etc/os-release not found"
     exit 3
+fi
+
+# Detect Ubuntu ESM coverage
+if [[ "$ID" == "ubuntu" ]]; then
+    IS_ESM_ACTIVE=false
+
+    # Check via modern Ubuntu Pro CLI tool
+    if command -v pro &>/dev/null; then
+        if pro status --format json 2>/dev/null | grep -Pz '(?s)"name"\s*:\s*"esm-(infra|apps)"[^}]*?"status"\s*:\s*"enabled"|"esm-(infra|apps)"\s*:\s*\{[^}]*?"status"\s*:\s*"enabled"' &>/dev/null; then
+            IS_ESM_ACTIVE=true
+        fi
+    # Check via legacy Ubuntu Advantage tool
+    elif command -v ubuntu-advantage &>/dev/null; then
+        if ubuntu-advantage status 2>/dev/null | grep -E 'esm-infra|esm-apps' | grep -q 'enabled'; then
+            IS_ESM_ACTIVE=true
+        fi
+    # Fallback check for active ESM repository sources in APT configuration (covers classic and deb822 source formats)
+    elif grep -rEq '^\s*[^#].*esm\.ubuntu\.com' /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null; then
+        IS_ESM_ACTIVE=true
+    fi
+
+    # Append -esm suffix if system is covered
+    if [[ "$IS_ESM_ACTIVE" == true ]]; then
+        OS="${OS}-esm"
+    fi
 fi
 
 # Get EOL date for the current OS
