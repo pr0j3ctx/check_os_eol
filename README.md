@@ -149,8 +149,8 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Changelog
 
-### [1.x.y] - 2026-10-xx
-- Add support for detecting Ubuntu ESM (Expanded Security Maintenance)
+### [1.1.0] - 2026-10-28
+- Add support for detecting Ubuntu ESM (Expanded Security Maintenance), checked via `pro`, `ubuntu-advantage`, or APT source files as a fallback
 - Added EOL data for Ubuntu ESM versions 16.04 to 26.04
 ### [1.0.4] - 2026-05-16
 - Added EOL data for Debian 4-9 and Ubuntu 25.10/26.04
